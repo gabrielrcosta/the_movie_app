@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">Mobile To You</string>
+    <string name="image_view">Image</string>
+    <string name="title">Title</string>
+    <string name="date_format">yyyy-mm-dd</string>
+    <string name="views">Views</string>
+    <string name="likes">Likes</string>
+    <string name="overview">Overview</string>
+    <string name="random_number">2541</string>
+    <string name="suggested_movies">Suggested Movies</string>
+</resources>
