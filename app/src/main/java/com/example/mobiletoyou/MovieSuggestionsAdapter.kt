@@ -9,13 +9,14 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 
-private const val viewItemCount = 1
+private const val VIEW_ITEM_COUNT = 1
 private const val TYPE_HEADER = 0
 private const val TYPE_ITEM = 1
 
 class MovieSuggestionsAdapter(
     private val context: Context,
-    private val movieSuggestions: MutableList<MoviesSuggestionsList>
+    private val movieSuggestions: MutableList<MoviesSuggestionsList>,
+    private val listener: MovieItemClickListener
 ) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
@@ -34,23 +35,35 @@ class MovieSuggestionsAdapter(
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         if (holder is Header) {
             holder.movieLiked.visibility = View.INVISIBLE
-            Picasso.get().load(movieURL + movieDetail?.posterPath).into(holder.posterPath)
+            Picasso.get().load(MOVIE_URL + movieDetail?.posterPath).into(holder.posterPath)
             holder.likes.text = movieDetail?.voteCount.toString()
             holder.title.text = movieDetail?.title
             holder.overview.text = movieDetail?.overview
             holder.popularity.text = movieDetail?.popularity.toString()
+            holder.movieUnliked.setOnClickListener {holder.movieUnliked.visibility =
+                View.INVISIBLE; holder.movieLiked.visibility = View.VISIBLE; holder.likes.text =
+                movieDetail?.voteCount?.plus(1).toString()
+            }
+            holder.movieLiked.setOnClickListener { holder.movieLiked.visibility =
+                View.INVISIBLE; holder.movieUnliked.visibility = View.VISIBLE; holder.likes.text =
+                movieDetail?.voteCount.toString()
+            }
+
         } else if (holder is Item) {
-            val movie = movieSuggestions[position - viewItemCount]
+            val movie = movieSuggestions[position - VIEW_ITEM_COUNT]
             movie.apply {
-                Picasso.get().load(movieURL + movie.posterPathSuggestion).into(holder.posterPathSuggestion)
+                Picasso.get().load(MOVIE_URL + movie.posterPathSuggestion).into(holder.posterPathSuggestion)
                 holder.titleMoviesSuggestion.text = movie.titleSuggestion
                 holder.releaseDate.text = movie.releaseDateSuggestion
+            }
+            holder.itemView.setOnClickListener {
+                listener.onItemMovieClicked(movie.id)
             }
         }
     }
 
     override fun getItemCount(): Int {
-        return movieSuggestions.size + viewItemCount
+        return movieSuggestions.size + VIEW_ITEM_COUNT
     }
 
     internal inner class Item(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -65,11 +78,11 @@ class MovieSuggestionsAdapter(
         val overview: TextView = itemView.findViewById(R.id.overview)
         val title: TextView = itemView.findViewById(R.id.title)
         val popularity: TextView = itemView.findViewById(R.id.views_text)
-        val likesIcon: ImageView = itemView.findViewById(R.id.like_icon)
+        val movieUnliked: ImageView = itemView.findViewById(R.id.like_movie)
         val movieLiked: ImageView = itemView.findViewById(R.id.like_movie_click)
     }
 
-    var movieDetail: MovieDetails? = null
+    private var movieDetail: MovieDetails? = null
 
     fun setMovieDetails(movieDetails: MovieDetails?) {
         this.movieDetail = movieDetails
@@ -87,5 +100,9 @@ class MovieSuggestionsAdapter(
         } else {
             TYPE_ITEM
         }
+    }
+
+    interface MovieItemClickListener {
+        fun onItemMovieClicked(id: Int)
     }
 }
