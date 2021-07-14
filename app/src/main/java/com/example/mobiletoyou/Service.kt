@@ -16,4 +16,8 @@ interface Service {
         @Path("movie_id") movieId: Int,
         @Query("api_key") apiKey: String
     ): Call<MoviesSuggestionsResponse>
+    @GET("movie/popular")
+    fun getPopularMovies(
+        @Query("api_key") apiKey: String
+    ): Call<MoviesListResponse>
 }
