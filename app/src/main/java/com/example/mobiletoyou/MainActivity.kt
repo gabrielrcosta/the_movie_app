@@ -76,7 +76,7 @@ class MainActivity : AppCompatActivity() {
         return object :
             MovieSuggestionsAdapter.MovieItemClickListener {
             override fun onItemMovieClicked(id: Int) {
-                val intent = Intent(this@MainActivity, MainActivity::class.java)
+                val intent = Intent(this@MainActivity, CastMovieActivity::class.java)
                 intent.putExtra(NEXT_MOVIE, id)
                 startActivity(intent)
             }

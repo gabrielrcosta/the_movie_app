@@ -8,4 +8,11 @@
     <string name="overview">Overview</string>
     <string name="random_number">2541</string>
     <string name="suggested_movies">Suggested Movies</string>
+    <string name="name">Name Surname</string>
+    <string name="person_birthday">Birthday:</string>
+    <string name="place_of_birth">Place of Birth:</string>
+    <string name="place">London, UK</string>
+    <string name="occupation">Occupation:</string>
+    <string name="profession">Actor</string>
+    <string name="biography">Biography:</string>
 </resources>

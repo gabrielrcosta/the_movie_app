@@ -6,3 +6,4 @@ const val ERROR_MSG = "Error"
 const val MOVIE_ID = 337404
 const val API_KEY = "1f6b7aa9053b85e9c0749cae0bf8524b"
 const val NEXT_MOVIE = "nextMovie"
+const val GET_PERSONAL_ID = "getCastID"

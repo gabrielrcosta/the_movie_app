@@ -9,8 +9,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 
 class MenuMoviesAdapter(
-    private val context: Context, val moviesList: MutableList<MoviesList>,
-    val listener: MovieItemClickListener
+    private val context: Context,
+    val moviesList: MutableList<MoviesList>,
+    private val listener: MovieItemClickListener
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val view = LayoutInflater.from(context).inflate(R.layout.menu_movies, parent, false)
