@@ -1,4 +1,4 @@
-package com.example.mobiletoyou
+package com.example.mobiletoyou.network
 
 import com.example.mobiletoyou.model.Movie
 import com.google.gson.annotations.SerializedName

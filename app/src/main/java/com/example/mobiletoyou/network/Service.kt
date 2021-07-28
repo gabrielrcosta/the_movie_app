@@ -1,7 +1,10 @@
-package com.example.mobiletoyou
+package com.example.mobiletoyou.network
 
 import com.example.mobiletoyou.model.MovieDetails
 import com.example.mobiletoyou.model.PersonalInformation
+import com.example.mobiletoyou.network.CastListResponse
+import com.example.mobiletoyou.network.MoviesListResponse
+import com.example.mobiletoyou.network.MoviesSuggestionsResponse
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Path

@@ -10,6 +10,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.mobiletoyou.*
 import com.example.mobiletoyou.adapters.MenuMoviesAdapter
 import com.example.mobiletoyou.model.Movie
+import com.example.mobiletoyou.network.MoviesListResponse
+import com.example.mobiletoyou.network.RetrofitInitializer
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

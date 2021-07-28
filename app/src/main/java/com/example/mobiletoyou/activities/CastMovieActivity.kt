@@ -13,6 +13,8 @@ import com.example.mobiletoyou.*
 import com.example.mobiletoyou.adapters.CastAdapter
 import com.example.mobiletoyou.model.CastList
 import com.example.mobiletoyou.model.MovieDetails
+import com.example.mobiletoyou.network.CastListResponse
+import com.example.mobiletoyou.network.RetrofitInitializer
 import com.squareup.picasso.Picasso
 import retrofit2.Call
 import retrofit2.Callback

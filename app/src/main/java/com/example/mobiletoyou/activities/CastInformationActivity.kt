@@ -8,6 +8,7 @@ import android.widget.TextView
 import android.widget.Toast
 import com.example.mobiletoyou.*
 import com.example.mobiletoyou.model.PersonalInformation
+import com.example.mobiletoyou.network.RetrofitInitializer
 import com.squareup.picasso.Picasso
 import retrofit2.Call
 import retrofit2.Callback

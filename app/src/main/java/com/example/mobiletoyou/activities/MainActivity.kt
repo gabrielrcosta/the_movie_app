@@ -10,6 +10,8 @@ import com.example.mobiletoyou.*
 import com.example.mobiletoyou.adapters.MovieSuggestionsAdapter
 import com.example.mobiletoyou.model.MovieDetails
 import com.example.mobiletoyou.model.SuggestedMovie
+import com.example.mobiletoyou.network.MoviesSuggestionsResponse
+import com.example.mobiletoyou.network.RetrofitInitializer
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

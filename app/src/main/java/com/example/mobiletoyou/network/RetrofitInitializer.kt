@@ -1,5 +1,6 @@
-package com.example.mobiletoyou
+package com.example.mobiletoyou.network
 
+import com.example.mobiletoyou.BASE_URL
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
