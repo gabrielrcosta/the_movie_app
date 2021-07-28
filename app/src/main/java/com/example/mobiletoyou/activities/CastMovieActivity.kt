@@ -1,4 +1,4 @@
-package com.example.mobiletoyou
+package com.example.mobiletoyou.activities
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -9,6 +9,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.mobiletoyou.*
 import com.example.mobiletoyou.model.CastList
 import com.example.mobiletoyou.model.MovieDetails
 import com.squareup.picasso.Picasso

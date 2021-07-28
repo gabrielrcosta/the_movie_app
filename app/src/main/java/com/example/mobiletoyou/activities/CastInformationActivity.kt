@@ -1,4 +1,4 @@
-package com.example.mobiletoyou
+package com.example.mobiletoyou.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -6,6 +6,7 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import com.example.mobiletoyou.*
 import com.example.mobiletoyou.model.PersonalInformation
 import com.squareup.picasso.Picasso
 import retrofit2.Call
