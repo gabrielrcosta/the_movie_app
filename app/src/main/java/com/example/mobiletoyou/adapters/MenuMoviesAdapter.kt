@@ -1,4 +1,4 @@
-package com.example.mobiletoyou
+package com.example.mobiletoyou.adapters
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -6,6 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.mobiletoyou.MOVIE_URL
+import com.example.mobiletoyou.R
 import com.example.mobiletoyou.model.Movie
 import com.squareup.picasso.Picasso
 

@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mobiletoyou.*
+import com.example.mobiletoyou.adapters.MovieSuggestionsAdapter
 import com.example.mobiletoyou.model.MovieDetails
 import com.example.mobiletoyou.model.SuggestedMovie
 import retrofit2.Call

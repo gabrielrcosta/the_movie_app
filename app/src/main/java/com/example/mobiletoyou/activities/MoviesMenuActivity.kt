@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mobiletoyou.*
+import com.example.mobiletoyou.adapters.MenuMoviesAdapter
 import com.example.mobiletoyou.model.Movie
 import retrofit2.Call
 import retrofit2.Callback

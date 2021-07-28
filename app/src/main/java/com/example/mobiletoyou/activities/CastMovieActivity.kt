@@ -10,6 +10,7 @@ import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mobiletoyou.*
+import com.example.mobiletoyou.adapters.CastAdapter
 import com.example.mobiletoyou.model.CastList
 import com.example.mobiletoyou.model.MovieDetails
 import com.squareup.picasso.Picasso
