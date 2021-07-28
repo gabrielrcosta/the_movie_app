@@ -1,5 +1,7 @@
 package com.example.mobiletoyou
 
+import com.example.mobiletoyou.model.MovieDetails
+import com.example.mobiletoyou.model.PersonalInformation
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Path

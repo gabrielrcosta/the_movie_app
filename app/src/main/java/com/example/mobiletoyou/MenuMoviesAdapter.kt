@@ -6,11 +6,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.mobiletoyou.model.Movie
 import com.squareup.picasso.Picasso
 
 class MenuMoviesAdapter(
     private val context: Context,
-    val moviesList: MutableList<MoviesList>,
+    val movie: MutableList<Movie>,
     private val listener: MovieItemClickListener
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
@@ -20,7 +21,7 @@ class MenuMoviesAdapter(
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         if (holder is Item) {
-            val movie = moviesList[position]
+            val movie = movie[position]
             Picasso.get().load(MOVIE_URL + movie.poster_path).into(holder.posterPath)
             holder.itemView.setOnClickListener {
                 listener.onItemMovieClicked(id = movie.id)
@@ -29,15 +30,15 @@ class MenuMoviesAdapter(
     }
 
     override fun getItemCount(): Int {
-        return moviesList.size
+        return movie.size
     }
 
     internal inner class Item(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val posterPath: ImageView = itemView.findViewById(R.id.poster_path)
     }
 
-    fun setData(movies: MutableList<MoviesList>) {
-        this.moviesList.addAll(movies)
+    fun setData(movies: MutableList<Movie>) {
+        this.movie.addAll(movies)
         notifyDataSetChanged()
     }
 

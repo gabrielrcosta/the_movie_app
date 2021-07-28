@@ -7,15 +7,16 @@ import android.widget.Toast
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.mobiletoyou.model.Movie
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
 class MoviesMenuActivity : AppCompatActivity() {
-    private val moviesList: MutableList<MoviesList> = mutableListOf()
+    private val movie: MutableList<Movie> = mutableListOf()
     private lateinit var gridLayoutManager: GridLayoutManager
     private val menuMoviesAdapter: MenuMoviesAdapter by lazy {
-        MenuMoviesAdapter(this, moviesList = moviesList, getMovieItemClickListener())
+        MenuMoviesAdapter(this, movie = movie, getMovieItemClickListener())
     }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,7 +37,7 @@ class MoviesMenuActivity : AppCompatActivity() {
                     call: Call<MoviesListResponse>,
                     response: Response<MoviesListResponse>
                 ) {
-                    val moviesListResponse = response.body()?.moviesList
+                    val moviesListResponse = response.body()?.movieList
                     if (moviesListResponse != null) {
                         menuMoviesAdapter.setData(moviesListResponse)
                     }

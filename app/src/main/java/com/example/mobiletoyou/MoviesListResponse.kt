@@ -1,7 +1,8 @@
 package com.example.mobiletoyou
 
+import com.example.mobiletoyou.model.Movie
 import com.google.gson.annotations.SerializedName
 
 class MoviesListResponse(
     @SerializedName("results")
-    val moviesList: MutableList<MoviesList>)
+    val movieList: MutableList<Movie>)

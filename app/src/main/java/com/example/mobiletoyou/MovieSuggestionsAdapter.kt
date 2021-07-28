@@ -7,6 +7,8 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.mobiletoyou.model.MovieDetails
+import com.example.mobiletoyou.model.SuggestedMovie
 import com.squareup.picasso.Picasso
 
 private const val VIEW_ITEM_COUNT = 1
@@ -15,7 +17,7 @@ private const val TYPE_ITEM = 1
 
 class MovieSuggestionsAdapter(
     private val context: Context,
-    private val movieSuggestions: MutableList<MoviesSuggestionsList>,
+    private val movieSuggestions: MutableList<SuggestedMovie>,
     private val listener: MovieItemClickListener
 ) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
@@ -89,7 +91,7 @@ class MovieSuggestionsAdapter(
         notifyDataSetChanged()
     }
 
-    fun setData(movies: MutableList<MoviesSuggestionsList>) {
+    fun setData(movies: MutableList<SuggestedMovie>) {
         this.movieSuggestions.addAll(movies)
         notifyDataSetChanged()
     }

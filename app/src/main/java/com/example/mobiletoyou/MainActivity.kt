@@ -6,12 +6,14 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.mobiletoyou.model.MovieDetails
+import com.example.mobiletoyou.model.SuggestedMovie
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
 class MainActivity : AppCompatActivity() {
-    private val moviesList: MutableList<MoviesSuggestionsList> = mutableListOf()
+    private val moviesList: MutableList<SuggestedMovie> = mutableListOf()
     private var movieDetails: MovieDetails? = null
     private val moviesSuggestionsAdapter: MovieSuggestionsAdapter by lazy {
         MovieSuggestionsAdapter(this, moviesList, getMovieItemClickListener())
