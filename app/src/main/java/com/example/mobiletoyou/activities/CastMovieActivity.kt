@@ -4,13 +4,12 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.widget.ImageView
-import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mobiletoyou.*
 import com.example.mobiletoyou.adapters.CastAdapter
+import com.example.mobiletoyou.databinding.ActivityCastMovieBinding
 import com.example.mobiletoyou.model.CastList
 import com.example.mobiletoyou.model.MovieDetails
 import com.example.mobiletoyou.network.CastListResponse
@@ -22,9 +21,7 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class CastMovieActivity : AppCompatActivity() {
-    private lateinit var posterPath: ImageView
-    private lateinit var title: TextView
-    private lateinit var overview: TextView
+    private lateinit var binding: ActivityCastMovieBinding
     private val castList: MutableList<CastList> = mutableListOf()
     private var movieDetails: MovieDetails? = null
     private val castAdapter: CastAdapter by lazy {
@@ -34,11 +31,8 @@ class CastMovieActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_cast_movie)
-
-        posterPath = findViewById(R.id.movie_picture)
-        title = findViewById(R.id.title_cast_view)
-        overview = findViewById(R.id.overview_cast_view)
+        binding = ActivityCastMovieBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         val recyclerView: RecyclerView = findViewById(R.id.cast_recycler)
         recyclerView.adapter = castAdapter
@@ -58,9 +52,11 @@ class CastMovieActivity : AppCompatActivity() {
                     response: Response<MovieDetails>
                 ) {
                     movieDetails = response.body()
-                    Picasso.get().load(MOVIE_URL + movieDetails?.posterPath).into(posterPath)
-                    title.text = movieDetails?.title
-                    overview.text = movieDetails?.overview
+                    binding.apply {
+                        Picasso.get().load(MOVIE_URL + movieDetails?.posterPath).into(moviePicture)
+                        titleCastView.text = movieDetails?.title
+                        overviewCastView.text = movieDetails?.overview
+                    }
                 }
 
                 override fun onFailure(call: Call<MovieDetails>, t: Throwable) {
