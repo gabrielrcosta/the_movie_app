@@ -10,6 +10,7 @@ import com.example.mobiletoyou.*
 import com.example.mobiletoyou.adapters.MovieSuggestionsAdapter
 import com.example.mobiletoyou.model.MovieDetails
 import com.example.mobiletoyou.model.SuggestedMovie
+import com.example.mobiletoyou.network.MovieRepository
 import com.example.mobiletoyou.network.MoviesSuggestionsResponse
 import com.example.mobiletoyou.network.RetrofitInitializer
 import retrofit2.Call
@@ -18,11 +19,12 @@ import retrofit2.Response
 
 class MainActivity : AppCompatActivity() {
     private val moviesList: MutableList<SuggestedMovie> = mutableListOf()
-    private var movieDetails: MovieDetails? = null
+    private val repository: MovieRepository by lazy {
+        MovieRepository()
+    }
     private val moviesSuggestionsAdapter: MovieSuggestionsAdapter by lazy {
         MovieSuggestionsAdapter(this, moviesList, getMovieItemClickListener())
     }
-    private var movieClicked = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,49 +35,28 @@ class MainActivity : AppCompatActivity() {
         recyclerView.adapter = moviesSuggestionsAdapter
         recyclerView.layoutManager = LinearLayoutManager(this)
 
-        movieClicked = intent.getIntExtra(NEXT_MOVIE, MOVIE_ID)
+        val movieId = intent.getIntExtra(NEXT_MOVIE, MOVIE_ID)
 
-        getMovieDetails(moviesSuggestionsAdapter, movieClicked)
-        getMovieSuggestions(moviesSuggestionsAdapter, movieClicked)
+        getMovieDetails(movieId)
+        getSuggestedMovies(movieId)
     }
 
-    private fun getMovieDetails(moviesSuggestionsAdapter: MovieSuggestionsAdapter, movieId: Int) {
-        RetrofitInitializer().service.getMovieDetails(movieId = movieId, apiKey = API_KEY)
-            .enqueue(object : Callback<MovieDetails> {
-                override fun onResponse(
-                    call: Call<MovieDetails>,
-                    response: Response<MovieDetails>
-                ) {
-                    movieDetails = response.body()
-                    moviesSuggestionsAdapter.setMovieDetails(movieDetails)
-                }
-
-                override fun onFailure(call: Call<MovieDetails>, t: Throwable) {
-                    Toast.makeText(this@MainActivity, ERROR_MSG, Toast.LENGTH_SHORT).show()
-                }
-            })
+    private fun getMovieDetails(movieId: Int) {
+        repository.getMovieDetails(movieId = movieId, object: MovieRepository.OnMovieSuccess{
+            override fun onMovieDetailsSuccess(movieDetails: MovieDetails?) {
+                moviesSuggestionsAdapter.setMovieDetails(movieDetails)
+            }
+        })
     }
 
-    private fun getMovieSuggestions(
-        moviesSuggestionsAdapter: MovieSuggestionsAdapter,
-        movieId: Int
-    ) {
-        RetrofitInitializer().service.getMoviesSuggestions(movieId = movieId, apiKey = API_KEY)
-            .enqueue(object : Callback<MoviesSuggestionsResponse> {
-                override fun onResponse(
-                    call: Call<MoviesSuggestionsResponse>,
-                    response: Response<MoviesSuggestionsResponse>
-                ) {
-                    val listResponse = response.body()?.movies
-                    if (listResponse != null) {
-                        moviesSuggestionsAdapter.setData(listResponse)
-                    }
+    private fun getSuggestedMovies(movieId: Int) {
+        repository.getMovieSuggestions(movieId = movieId, object: MovieRepository.OnSuggestedMovieSuccess{
+            override fun onSuggestedMovieResponseSuccess(suggestedMovie: MutableList<SuggestedMovie>?) {
+                if (suggestedMovie != null) {
+                    moviesSuggestionsAdapter.setData(suggestedMovie)
                 }
-
-                override fun onFailure(call: Call<MoviesSuggestionsResponse>, t: Throwable) {
-                    Toast.makeText(this@MainActivity, ERROR_MSG, Toast.LENGTH_SHORT).show()
-                }
-            })
+            }
+        })
     }
 
     private fun getMovieItemClickListener(): MovieSuggestionsAdapter.MovieItemClickListener {
