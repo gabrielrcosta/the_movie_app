@@ -1,9 +1,6 @@
 package com.example.mobiletoyou.network
 
-import com.example.mobiletoyou.model.Cast
-import com.example.mobiletoyou.model.Movie
-import com.example.mobiletoyou.model.MovieDetails
-import com.example.mobiletoyou.model.SuggestedMovie
+import com.example.mobiletoyou.model.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -79,6 +76,25 @@ class MovieRepository {
         )
     }
 
+    fun getPersonalInformation(personId: Int, success: OnCastInformationSuccess) {
+        RetrofitInitializer().service.getPersonalInformation(personId = personId)
+            .enqueue(object : Callback<PersonalInformation>{
+                override fun onResponse(
+                    call: Call<PersonalInformation>,
+                    response: Response<PersonalInformation>
+                ) {
+                    val personDetails = response.body()
+                    if (personDetails != null) {
+                        success.onCastInformationResponseSuccess(personDetails)
+                    }
+                }
+
+                override fun onFailure(call: Call<PersonalInformation>, t: Throwable) {
+                    //Toast.makeText(this@CastInformationActivity, ERROR_MSG, Toast.LENGTH_SHORT).show()
+                }
+            })
+    }
+
     interface OnMoviesListSuccess {
         fun onMoviesListResponseSuccess(movieList: MutableList<Movie>?)
     }
@@ -93,5 +109,9 @@ class MovieRepository {
 
     interface OnMovieCastSuccess {
         fun onMovieCastResponseSuccess(cast: MutableList<Cast>)
+    }
+
+    interface OnCastInformationSuccess {
+        fun onCastInformationResponseSuccess(castInformation: PersonalInformation)
     }
 }
