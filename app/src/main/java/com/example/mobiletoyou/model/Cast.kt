@@ -2,7 +2,7 @@ package com.example.mobiletoyou.model
 
 import com.google.gson.annotations.SerializedName
 
-class CastList(
+class Cast(
     @SerializedName("id")
     val id: Int,
     @SerializedName("profile_path")

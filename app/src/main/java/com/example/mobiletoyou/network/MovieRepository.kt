@@ -1,5 +1,6 @@
 package com.example.mobiletoyou.network
 
+import com.example.mobiletoyou.model.Cast
 import com.example.mobiletoyou.model.Movie
 import com.example.mobiletoyou.model.MovieDetails
 import com.example.mobiletoyou.model.SuggestedMovie
@@ -59,6 +60,25 @@ class MovieRepository {
             })
     }
 
+    fun getCastList(movieId: Int, success: OnMovieCastSuccess) {
+        RetrofitInitializer().service.getCastInfo(movieId = movieId).enqueue(
+            object : Callback<CastListResponse> {
+                override fun onResponse(
+                    call: Call<CastListResponse>,
+                    response: Response<CastListResponse>
+                ) {
+                    val castResponse = response.body()?.cast
+                    if (castResponse != null) {
+                        success.onMovieCastResponseSuccess(cast = castResponse)
+                    }
+                }
+                override fun onFailure(call: Call<CastListResponse>, t: Throwable) {
+                    //Toast.makeText(this@CastMovieActivity, ERROR_MSG, Toast.LENGTH_SHORT).show()
+                }
+            }
+        )
+    }
+
     interface OnMoviesListSuccess {
         fun onMoviesListResponseSuccess(movieList: MutableList<Movie>?)
     }
@@ -69,5 +89,9 @@ class MovieRepository {
 
     interface OnSuggestedMovieSuccess {
         fun onSuggestedMovieResponseSuccess(suggestedMovie: MutableList<SuggestedMovie>?)
+    }
+
+    interface OnMovieCastSuccess {
+        fun onMovieCastResponseSuccess(cast: MutableList<Cast>)
     }
 }
