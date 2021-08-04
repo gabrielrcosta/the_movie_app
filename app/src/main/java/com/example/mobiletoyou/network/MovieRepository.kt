@@ -7,7 +7,7 @@ import retrofit2.Response
 
 class MovieRepository {
     fun getMovieDetails(movieId: Int, success: OnMovieSuccess) {
-        RetrofitInitializer().service.getMovieDetails(movieId = movieId)
+        RetrofitInitializer.service.getMovieDetails(movieId = movieId)
             .enqueue(object : Callback<MovieDetails> {
                 override fun onResponse(
                     call: Call<MovieDetails>,
@@ -24,7 +24,7 @@ class MovieRepository {
     }
 
     fun getMovieSuggestions(movieId: Int, success: OnSuggestedMovieSuccess) {
-        RetrofitInitializer().service.getMoviesSuggestions(movieId = movieId)
+        RetrofitInitializer.service.getMoviesSuggestions(movieId = movieId)
             .enqueue(object : Callback<MoviesSuggestionsResponse> {
                 override fun onResponse(
                     call: Call<MoviesSuggestionsResponse>,
@@ -41,7 +41,7 @@ class MovieRepository {
     }
 
     fun getMoviesList(success: OnMoviesListSuccess) {
-        RetrofitInitializer().service.getPopularMovies()
+        RetrofitInitializer.service.getPopularMovies()
             .enqueue(object : Callback<MoviesListResponse>{
                 override fun onResponse(
                     call: Call<MoviesListResponse>,
@@ -58,7 +58,7 @@ class MovieRepository {
     }
 
     fun getCastList(movieId: Int, success: OnMovieCastSuccess) {
-        RetrofitInitializer().service.getCastInfo(movieId = movieId).enqueue(
+        RetrofitInitializer.service.getCastInfo(movieId = movieId).enqueue(
             object : Callback<CastListResponse> {
                 override fun onResponse(
                     call: Call<CastListResponse>,
@@ -77,7 +77,7 @@ class MovieRepository {
     }
 
     fun getPersonalInformation(personId: Int, success: OnCastInformationSuccess) {
-        RetrofitInitializer().service.getPersonalInformation(personId = personId)
+        RetrofitInitializer.service.getPersonalInformation(personId = personId)
             .enqueue(object : Callback<PersonalInformation>{
                 override fun onResponse(
                     call: Call<PersonalInformation>,

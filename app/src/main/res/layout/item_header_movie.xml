@@ -136,17 +136,4 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/title" />
 
-    <TextView
-        android:id="@+id/movies_suggested_header"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/suggested_movies"
-        android:layout_marginTop="14dp"
-        android:layout_marginStart="6dp"
-        android:textColor="@color/white"
-        android:textStyle="bold"
-        android:textSize="18sp"
-        app:layout_constraintTop_toBottomOf="@id/overview"
-        app:layout_constraintStart_toStartOf="parent"/>
-
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -2,7 +2,6 @@ package com.example.mobiletoyou.activities
 
 import android.content.Intent
 import android.os.Bundle
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -11,11 +10,7 @@ import com.example.mobiletoyou.adapters.MovieSuggestionsAdapter
 import com.example.mobiletoyou.model.MovieDetails
 import com.example.mobiletoyou.model.SuggestedMovie
 import com.example.mobiletoyou.network.MovieRepository
-import com.example.mobiletoyou.network.MoviesSuggestionsResponse
-import com.example.mobiletoyou.network.RetrofitInitializer
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+
 
 class MainActivity : AppCompatActivity() {
     private val moviesList: MutableList<SuggestedMovie> = mutableListOf()
@@ -31,7 +26,6 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         val recyclerView: RecyclerView = findViewById(R.id.recycler_view)
-
         recyclerView.adapter = moviesSuggestionsAdapter
         recyclerView.layoutManager = LinearLayoutManager(this)
 

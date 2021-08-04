@@ -44,19 +44,22 @@ class MovieSuggestionsAdapter(
             holder.title.text = movieDetail?.title
             holder.overview.text = movieDetail?.overview
             holder.popularity.text = movieDetail?.popularity.toString()
-            holder.movieUnliked.setOnClickListener {holder.movieUnliked.visibility =
-                View.INVISIBLE; holder.movieLiked.visibility = View.VISIBLE; holder.likes.text =
+            holder.movieUnliked.setOnClickListener {
+                holder.movieUnliked.visibility =
+                    View.INVISIBLE; holder.movieLiked.visibility = View.VISIBLE; holder.likes.text =
                 movieDetail?.voteCount?.plus(1).toString()
             }
-            holder.movieLiked.setOnClickListener { holder.movieLiked.visibility =
-                View.INVISIBLE; holder.movieUnliked.visibility = View.VISIBLE; holder.likes.text =
+            holder.movieLiked.setOnClickListener {
+                holder.movieLiked.visibility =
+                    View.INVISIBLE; holder.movieUnliked.visibility =
+                View.VISIBLE; holder.likes.text =
                 movieDetail?.voteCount.toString()
             }
-
         } else if (holder is Item) {
             val movie = movieSuggestions[position - VIEW_ITEM_COUNT]
             movie.apply {
-                Picasso.get().load(MOVIE_URL + movie.posterPathSuggestion).into(holder.posterPathSuggestion)
+                Picasso.get().load(MOVIE_URL + movie.posterPathSuggestion)
+                    .into(holder.posterPathSuggestion)
                 holder.titleMoviesSuggestion.text = movie.titleSuggestion
                 holder.releaseDate.text = movie.releaseDateSuggestion
             }
@@ -67,7 +70,7 @@ class MovieSuggestionsAdapter(
     }
 
     override fun getItemCount(): Int {
-        return movieSuggestions.size + VIEW_ITEM_COUNT
+        return VIEW_ITEM_COUNT + movieSuggestions.size
     }
 
     internal inner class Item(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -99,10 +102,9 @@ class MovieSuggestionsAdapter(
     }
 
     override fun getItemViewType(position: Int): Int {
-        return if (position == 0) {
-            TYPE_HEADER
-        } else {
-            TYPE_ITEM
+        return when (position) {
+            0 -> TYPE_HEADER
+            else -> TYPE_ITEM
         }
     }
 

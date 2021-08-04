@@ -50,7 +50,6 @@ class MoviesMenuActivity : AppCompatActivity() {
                 intent.putExtra(NEXT_MOVIE, id)
                 startActivity(intent)
             }
-
         }
     }
 }
