@@ -46,7 +46,7 @@ class CastAdapter(
         val name: TextView = itemView.findViewById(R.id.cast_name)
     }
 
-    fun setData(cast: MutableList<Cast>) {
+    fun setCastData(cast: MutableList<Cast>) {
         this.cast.addAll(cast)
         notifyDataSetChanged()
     }
