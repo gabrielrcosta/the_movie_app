@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/black">
 
     <ImageView
         android:id="@+id/background_picture"
         android:layout_width="match_parent"
         android:layout_height="400dp"
-        android:scaleType="fitXY"
         android:contentDescription="@string/image_view"
+        android:scaleType="fitXY"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -23,10 +23,10 @@
         android:layout_marginEnd="10dp"
         android:layout_marginBottom="10dp"
         android:background="@drawable/ic_baseline_favorite_border_24"
+        android:contentDescription="@string/image_view"
         android:padding="16dp"
         app:layout_constraintBottom_toBottomOf="@id/background_picture"
-        app:layout_constraintEnd_toEndOf="@id/background_picture"
-        android:contentDescription="@string/image_view" />
+        app:layout_constraintEnd_toEndOf="@id/background_picture" />
 
     <ImageView
         android:id="@+id/like_movie_click"
@@ -35,22 +35,22 @@
         android:layout_marginEnd="10dp"
         android:layout_marginBottom="10dp"
         android:background="@drawable/ic_baseline_favorite_24"
+        android:contentDescription="@string/image_view"
         android:padding="16dp"
         app:layout_constraintBottom_toBottomOf="@id/background_picture"
-        app:layout_constraintEnd_toEndOf="@id/background_picture"
-        android:contentDescription="@string/image_view" />
+        app:layout_constraintEnd_toEndOf="@id/background_picture" />
 
     <ImageView
         android:id="@+id/like_icon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="6dp"
         android:layout_marginStart="4dp"
+        android:layout_marginTop="6dp"
         android:background="@drawable/ic_baseline_favorite_border_24"
+        android:contentDescription="@string/image_view"
         app:layout_constraintEnd_toStartOf="@id/likes"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/background_picture"
-        android:contentDescription="@string/image_view" />
+        app:layout_constraintTop_toBottomOf="@id/background_picture" />
 
     <TextView
         android:id="@+id/likes"
@@ -80,19 +80,19 @@
         android:id="@+id/views_icon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="6dp"
         android:layout_marginStart="40dp"
+        android:layout_marginTop="6dp"
         android:background="@drawable/ic_baseline_preview_24"
+        android:contentDescription="@string/image_view"
         app:layout_constraintStart_toEndOf="@+id/likes_text"
-        app:layout_constraintTop_toBottomOf="@id/background_picture"
-        android:contentDescription="@string/image_view" />
+        app:layout_constraintTop_toBottomOf="@id/background_picture" />
 
     <TextView
         android:id="@+id/views_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="6dp"
         android:layout_marginStart="4dp"
+        android:layout_marginTop="6dp"
         android:text="@string/random_number"
         android:textColor="@color/white"
         android:textSize="14sp"
@@ -108,7 +108,7 @@
         android:textColor="@color/white"
         android:textSize="14sp"
         app:layout_constraintStart_toEndOf="@id/views_text"
-        app:layout_constraintTop_toBottomOf="@id/background_picture"/>
+        app:layout_constraintTop_toBottomOf="@id/background_picture" />
 
     <TextView
         android:id="@+id/title"
@@ -127,8 +127,8 @@
         android:id="@+id/overview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="6dp"
         android:layout_marginStart="6dp"
+        android:layout_marginTop="6dp"
         android:layout_marginEnd="20dp"
         android:text="@string/overview"
         android:textColor="@color/white"
