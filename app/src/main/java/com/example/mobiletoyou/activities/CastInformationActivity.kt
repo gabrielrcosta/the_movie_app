@@ -30,22 +30,26 @@ class CastInformationActivity : AppCompatActivity() {
     private fun getPersonalInformation(personId: Int) {
         repository.getPersonalInformation(personId = personId, object : MovieRepository.OnCastInformationSuccess {
             override fun onCastInformationResponseSuccess(castInformation: PersonalInformation) {
-                binding.apply {
-                    Picasso.get().load(MOVIE_URL + castInformation.profilePath).into(personPicture)
-                    personName.text = castInformation.personName
-                    personBirthdayText.text = castInformation.birthday
-                    personPlaceText.text = castInformation.placeOfBirth
-                    personOccupation.text = castInformation.career
-                    biography.text = castInformation.biography
-                    popularity.text = castInformation.popularity
-                    starUnliked.setOnClickListener {
-                        starUnliked.visibility = View.INVISIBLE; starLiked.visibility = View.VISIBLE
-                    }
-                    starLiked.setOnClickListener {
-                        starLiked.visibility = View.INVISIBLE; starUnliked.visibility = View.VISIBLE
-                    }
-                }
+                setupInformationScreen(castInformation)
             }
         })
+    }
+
+    private fun setupInformationScreen(castInformation: PersonalInformation) {
+        binding.apply {
+            Picasso.get().load(MOVIE_URL + castInformation.profilePath).into(personPicture)
+            personName.text = castInformation.personName
+            personBirthdayText.text = castInformation.birthday
+            personPlaceText.text = castInformation.placeOfBirth
+            personOccupation.text = castInformation.career
+            biography.text = castInformation.biography
+            popularity.text = castInformation.popularity
+            starUnliked.setOnClickListener {
+                starUnliked.visibility = View.INVISIBLE; starLiked.visibility = View.VISIBLE
+            }
+            starLiked.setOnClickListener {
+                starLiked.visibility = View.INVISIBLE; starUnliked.visibility = View.VISIBLE
+            }
+        }
     }
 }
