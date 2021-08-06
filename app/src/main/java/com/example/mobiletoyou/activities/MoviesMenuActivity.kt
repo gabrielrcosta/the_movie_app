@@ -1,35 +1,39 @@
 package com.example.mobiletoyou.activities
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.example.mobiletoyou.*
 import com.example.mobiletoyou.adapters.MenuMoviesAdapter
+import com.example.mobiletoyou.databinding.ActivityMoviesMenuBinding
 import com.example.mobiletoyou.model.Movie
 import com.example.mobiletoyou.network.MovieRepository
 
 class MoviesMenuActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityMoviesMenuBinding
     private val movie: MutableList<Movie> = mutableListOf()
     private lateinit var gridLayoutManager: GridLayoutManager
     private val repository: MovieRepository by lazy {
         MovieRepository()
     }
-    private val menuMoviesAdapter: MenuMoviesAdapter by lazy {
+    private val menuMoviesAdapter: MenuMoviesAdapter =
         MenuMoviesAdapter(this, movie = movie, getMovieItemClickListener())
-    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_movies_menu)
+        binding = ActivityMoviesMenuBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        val recyclerView: RecyclerView = findViewById(R.id.recycler_menu_movies)
-        recyclerView.adapter = menuMoviesAdapter
-        gridLayoutManager = GridLayoutManager(this, 3, LinearLayoutManager.VERTICAL, false)
-        recyclerView.layoutManager = gridLayoutManager
-
+        setupAdapter()
         getMoviesList()
+    }
+
+    private fun setupAdapter() {
+        binding.recyclerMenuMovies.adapter = menuMoviesAdapter
+        gridLayoutManager = GridLayoutManager(this, 3, LinearLayoutManager.VERTICAL, false)
+        binding.recyclerMenuMovies.layoutManager = gridLayoutManager
     }
 
     private fun getMoviesList() {
