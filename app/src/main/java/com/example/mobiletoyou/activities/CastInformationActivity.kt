@@ -1,18 +1,14 @@
 package com.example.mobiletoyou.activities
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
-import com.example.mobiletoyou.*
+import androidx.appcompat.app.AppCompatActivity
+import com.example.mobiletoyou.Constants.GET_PERSONAL_ID
+import com.example.mobiletoyou.Constants.MOVIE_URL
 import com.example.mobiletoyou.databinding.ActivityCastInformationBinding
 import com.example.mobiletoyou.model.PersonalInformation
 import com.example.mobiletoyou.network.MovieRepository
-import com.example.mobiletoyou.network.RetrofitInitializer
 import com.squareup.picasso.Picasso
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
 class CastInformationActivity : AppCompatActivity() {
     private val repository: MovieRepository by lazy {

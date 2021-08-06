@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.mobiletoyou.MOVIE_URL
+import com.example.mobiletoyou.Constants.MOVIE_URL
 import com.example.mobiletoyou.R
 import com.example.mobiletoyou.model.Movie
 import com.squareup.picasso.Picasso

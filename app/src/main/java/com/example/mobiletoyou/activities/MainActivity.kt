@@ -4,11 +4,14 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mobiletoyou.*
+import com.example.mobiletoyou.Constants.GET_PERSONAL_ID
+import com.example.mobiletoyou.Constants.MOVIE_ID
+import com.example.mobiletoyou.Constants.MOVIE_URL
+import com.example.mobiletoyou.Constants.NEXT_MOVIE
 import com.example.mobiletoyou.adapters.CastAdapter
 import com.example.mobiletoyou.adapters.MovieSuggestionsAdapter
 import com.example.mobiletoyou.databinding.ActivityMainBinding
