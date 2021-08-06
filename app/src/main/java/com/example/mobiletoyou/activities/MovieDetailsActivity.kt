@@ -14,7 +14,7 @@ import com.example.mobiletoyou.Constants.MOVIE_URL
 import com.example.mobiletoyou.Constants.NEXT_MOVIE
 import com.example.mobiletoyou.adapters.CastAdapter
 import com.example.mobiletoyou.adapters.MovieSuggestionsAdapter
-import com.example.mobiletoyou.databinding.ActivityMainBinding
+import com.example.mobiletoyou.databinding.ActivityMovieDetailsBinding
 import com.example.mobiletoyou.model.Cast
 import com.example.mobiletoyou.model.MovieDetails
 import com.example.mobiletoyou.model.SuggestedMovie
@@ -22,8 +22,8 @@ import com.example.mobiletoyou.network.MovieRepository
 import com.example.mobiletoyou.utilities.ItemClickListener
 import com.squareup.picasso.Picasso
 
-class MainActivity : AppCompatActivity() {
-    private lateinit var binding: ActivityMainBinding
+class MovieDetailsActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityMovieDetailsBinding
     private val moviesList: MutableList<SuggestedMovie> = mutableListOf()
     private val castList: MutableList<Cast> = mutableListOf()
     private val repository: MovieRepository by lazy {
@@ -36,7 +36,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityMainBinding.inflate(layoutInflater)
+        binding = ActivityMovieDetailsBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         binding.castRecyclerView.adapter = castAdapter
@@ -103,7 +103,7 @@ class MainActivity : AppCompatActivity() {
         return object :
             MovieSuggestionsAdapter.MovieItemClickListener {
             override fun onItemMovieClicked(id: Int) {
-                val intent = Intent(this@MainActivity, MainActivity::class.java)
+                val intent = Intent(this@MovieDetailsActivity, MovieDetailsActivity::class.java)
                 intent.putExtra(NEXT_MOVIE, id)
                 startActivity(intent)
             }
@@ -113,7 +113,7 @@ class MainActivity : AppCompatActivity() {
     private fun getCastItemClickListener(): ItemClickListener {
         return object : ItemClickListener {
             override fun onItemViewClicked(id: Int) {
-                val intent = Intent(this@MainActivity, CastInformationActivity::class.java)
+                val intent = Intent(this@MovieDetailsActivity, CastInformationActivity::class.java)
                 intent.putExtra(GET_PERSONAL_ID, id)
                 startActivity(intent)
                 Log.e("Error", "$id")

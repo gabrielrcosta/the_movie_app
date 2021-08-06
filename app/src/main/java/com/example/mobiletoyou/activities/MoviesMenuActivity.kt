@@ -51,7 +51,7 @@ class MoviesMenuActivity : AppCompatActivity() {
         return object :
             MenuMoviesAdapter.MovieItemClickListener {
             override fun onItemMovieClicked(id: Int) {
-                val intent = Intent(this@MoviesMenuActivity, MainActivity::class.java)
+                val intent = Intent(this@MoviesMenuActivity, MovieDetailsActivity::class.java)
                 intent.putExtra(NEXT_MOVIE, id)
                 startActivity(intent)
             }
