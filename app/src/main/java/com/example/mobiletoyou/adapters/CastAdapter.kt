@@ -4,7 +4,7 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.mobiletoyou.Constants.MOVIE_URL
+import com.example.mobiletoyou.utilities.Constants.MOVIE_URL
 import com.example.mobiletoyou.databinding.RowCastBinding
 import com.example.mobiletoyou.model.Cast
 import com.example.mobiletoyou.utilities.ItemClickListener

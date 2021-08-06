@@ -1,6 +1,6 @@
 package com.example.mobiletoyou.network
 
-import com.example.mobiletoyou.Constants.API_KEY
+import com.example.mobiletoyou.utilities.Constants.API_KEY
 import com.example.mobiletoyou.model.MovieDetails
 import com.example.mobiletoyou.model.PersonalInformation
 import retrofit2.Call

@@ -3,8 +3,8 @@ package com.example.mobiletoyou.activities
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import com.example.mobiletoyou.Constants.GET_PERSONAL_ID
-import com.example.mobiletoyou.Constants.MOVIE_URL
+import com.example.mobiletoyou.utilities.Constants.GET_PERSONAL_ID
+import com.example.mobiletoyou.utilities.Constants.MOVIE_URL
 import com.example.mobiletoyou.databinding.ActivityCastInformationBinding
 import com.example.mobiletoyou.model.PersonalInformation
 import com.example.mobiletoyou.network.MovieRepository

@@ -6,7 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.mobiletoyou.*
-import com.example.mobiletoyou.Constants.NEXT_MOVIE
+import com.example.mobiletoyou.utilities.Constants.NEXT_MOVIE
 import com.example.mobiletoyou.adapters.MenuMoviesAdapter
 import com.example.mobiletoyou.databinding.ActivityMoviesMenuBinding
 import com.example.mobiletoyou.model.Movie

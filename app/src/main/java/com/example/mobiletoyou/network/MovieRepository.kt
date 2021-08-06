@@ -20,7 +20,6 @@ class MovieRepository {
                 }
 
                 override fun onFailure(call: Call<MovieDetails>, t: Throwable) {
-                    //Toast.makeText(Application.context, ERROR_MSG, Toast.LENGTH_SHORT).show()
                 }
             })
     }
@@ -39,7 +38,6 @@ class MovieRepository {
                 }
 
                 override fun onFailure(call: Call<MoviesSuggestionsResponse>, t: Throwable) {
-                    //Toast.makeText(Application.context, ERROR_MSG, Toast.LENGTH_SHORT).show()
                 }
             })
     }
@@ -58,7 +56,6 @@ class MovieRepository {
                 }
 
                 override fun onFailure(call: Call<MoviesListResponse>, t: Throwable) {
-                    //Toast.makeText(this@MoviesMenuActivity, "$ERROR_MSG", Toast.LENGTH_SHORT).show()
                 }
             })
     }
@@ -77,7 +74,6 @@ class MovieRepository {
                 }
 
                 override fun onFailure(call: Call<CastListResponse>, t: Throwable) {
-                    //Toast.makeText(this@CastMovieActivity, ERROR_MSG, Toast.LENGTH_SHORT).show()
                 }
             }
         )
@@ -97,7 +93,6 @@ class MovieRepository {
                 }
 
                 override fun onFailure(call: Call<PersonalInformation>, t: Throwable) {
-                    //Toast.makeText(this@CastInformationActivity, ERROR_MSG, Toast.LENGTH_SHORT).show()
                 }
             })
     }
