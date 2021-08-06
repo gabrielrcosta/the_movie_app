@@ -2,13 +2,10 @@ package com.example.mobiletoyou.adapters
 
 import android.content.Context
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mobiletoyou.Constants.MOVIE_URL
-import com.example.mobiletoyou.R
+import com.example.mobiletoyou.databinding.RowMovieBinding
 import com.example.mobiletoyou.model.SuggestedMovie
 import com.squareup.picasso.Picasso
 
@@ -19,19 +16,15 @@ class SuggestedMoviesAdapter(
 ) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        val view = LayoutInflater.from(context).inflate(R.layout.row_movie, parent, false)
-        return Item(view)
+        val layoutInflater = LayoutInflater.from(context)
+        val rowMovieBinding = RowMovieBinding.inflate(layoutInflater, parent, false)
+        return Item(rowMovieBinding)
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         if (holder is Item) {
             val movie = movieSuggestions[position]
-            movie.apply {
-                Picasso.get().load(MOVIE_URL + movie.posterPathSuggestion)
-                    .into(holder.posterPathSuggestion)
-                holder.titleMoviesSuggestion.text = movie.titleSuggestion
-                holder.releaseDate.text = movie.releaseDateSuggestion
-            }
+            holder.binding(movie)
             holder.itemView.setOnClickListener {
                 listener.onItemMovieClicked(movie.id)
             }
@@ -42,10 +35,14 @@ class SuggestedMoviesAdapter(
         return movieSuggestions.size
     }
 
-    internal inner class Item(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val posterPathSuggestion: ImageView = itemView.findViewById(R.id.movies_suggestions_image)
-        val titleMoviesSuggestion: TextView = itemView.findViewById(R.id.movies_suggestions_title)
-        val releaseDate: TextView = itemView.findViewById(R.id.release_date)
+    inner class Item(private val rowMovieBinding: RowMovieBinding) :
+        RecyclerView.ViewHolder(rowMovieBinding.root) {
+        fun binding(suggestedMovie: SuggestedMovie) {
+            Picasso.get().load(MOVIE_URL + suggestedMovie.posterPathSuggestion)
+                .into(rowMovieBinding.moviesSuggestionsImage)
+            rowMovieBinding.moviesSuggestionsTitle.text = suggestedMovie.titleSuggestion
+            rowMovieBinding.releaseDate.text = suggestedMovie.releaseDateSuggestion
+        }
     }
 
     fun setData(movies: MutableList<SuggestedMovie>) {
