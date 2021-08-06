@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
     android:background="@color/black">
 
     <ImageView
@@ -58,7 +58,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="6dp"
         android:layout_marginTop="6dp"
-        android:text="@string/random_number"
+        tools:text="@string/random_number"
         android:textColor="@color/white"
         android:textSize="14sp"
         app:layout_constraintStart_toEndOf="@id/like_icon"
@@ -93,7 +93,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="4dp"
         android:layout_marginTop="6dp"
-        android:text="@string/random_number"
+        tools:text="@string/random_number"
         android:textColor="@color/white"
         android:textSize="14sp"
         app:layout_constraintStart_toEndOf="@+id/views_icon"
@@ -116,7 +116,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="4dp"
         android:layout_marginTop="6dp"
-        android:text="@string/title"
+        tools:text="@string/title"
         android:textColor="@color/white"
         android:textSize="20sp"
         android:textStyle="bold"
@@ -130,7 +130,7 @@
         android:layout_marginStart="6dp"
         android:layout_marginTop="6dp"
         android:layout_marginEnd="20dp"
-        android:text="@string/overview"
+        tools:text="@string/overview"
         android:textColor="@color/white"
         android:textSize="12sp"
         app:layout_constraintStart_toStartOf="parent"

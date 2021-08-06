@@ -1,11 +1,8 @@
 package com.example.mobiletoyou.network
 
-import com.example.mobiletoyou.API_KEY
+import com.example.mobiletoyou.utilities.Constants.API_KEY
 import com.example.mobiletoyou.model.MovieDetails
 import com.example.mobiletoyou.model.PersonalInformation
-import com.example.mobiletoyou.network.CastListResponse
-import com.example.mobiletoyou.network.MoviesListResponse
-import com.example.mobiletoyou.network.MoviesSuggestionsResponse
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -17,20 +14,24 @@ interface Service {
         @Path("movie_id") movieId: Int,
         @Query("api_key") apiKey: String = API_KEY
     ): Call<MovieDetails>
+
     @GET("movie/{movie_id}/similar")
     fun getMoviesSuggestions(
         @Path("movie_id") movieId: Int,
         @Query("api_key") apiKey: String = API_KEY
     ): Call<MoviesSuggestionsResponse>
+
     @GET("movie/popular")
     fun getPopularMovies(
         @Query("api_key") apiKey: String = API_KEY
     ): Call<MoviesListResponse>
+
     @GET("movie/{movie_id}/credits")
     fun getCastInfo(
         @Path("movie_id") movieId: Int,
         @Query("api_key") apiKey: String = API_KEY
     ): Call<CastListResponse>
+
     @GET("person/{person_id}")
     fun getPersonalInformation(
         @Path("person_id") personId: Int,

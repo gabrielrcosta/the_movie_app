@@ -13,7 +13,7 @@
         android:theme="@style/Theme.MobileToYou">
         <activity android:name=".activities.CastInformationActivity"></activity>
         <activity android:name=".activities.CastMovieActivity" />
-        <activity android:name=".activities.MainActivity" />
+        <activity android:name=".activities.MovieDetailsActivity" />
         <activity android:name=".activities.MoviesMenuActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
