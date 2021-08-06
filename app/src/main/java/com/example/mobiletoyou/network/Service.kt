@@ -14,20 +14,24 @@ interface Service {
         @Path("movie_id") movieId: Int,
         @Query("api_key") apiKey: String = API_KEY
     ): Call<MovieDetails>
+
     @GET("movie/{movie_id}/similar")
     fun getMoviesSuggestions(
         @Path("movie_id") movieId: Int,
         @Query("api_key") apiKey: String = API_KEY
     ): Call<MoviesSuggestionsResponse>
+
     @GET("movie/popular")
     fun getPopularMovies(
         @Query("api_key") apiKey: String = API_KEY
     ): Call<MoviesListResponse>
+
     @GET("movie/{movie_id}/credits")
     fun getCastInfo(
         @Path("movie_id") movieId: Int,
         @Query("api_key") apiKey: String = API_KEY
     ): Call<CastListResponse>
+
     @GET("person/{person_id}")
     fun getPersonalInformation(
         @Path("person_id") personId: Int,

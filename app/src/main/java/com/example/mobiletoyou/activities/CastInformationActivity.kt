@@ -28,11 +28,13 @@ class CastInformationActivity : AppCompatActivity() {
     }
 
     private fun getPersonalInformation(personId: Int) {
-        repository.getPersonalInformation(personId = personId, object : MovieRepository.OnCastInformationSuccess {
-            override fun onCastInformationResponseSuccess(castInformation: PersonalInformation) {
-                setupInformationScreen(castInformation)
-            }
-        })
+        repository.getPersonalInformation(
+            personId = personId,
+            object : MovieRepository.OnSuccess<PersonalInformation> {
+                override fun onResponseSuccess(success: PersonalInformation) {
+                    setupInformationScreen(castInformation = success)
+                }
+            })
     }
 
     private fun setupInformationScreen(castInformation: PersonalInformation) {

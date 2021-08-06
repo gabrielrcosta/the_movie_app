@@ -6,7 +6,7 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class MovieRepository {
-    fun getMovieDetails(movieId: Int, success: OnMovieSuccess) {
+    fun getMovieDetails(movieId: Int, success: OnSuccess<MovieDetails>) {
         RetrofitInitializer.service.getMovieDetails(movieId = movieId)
             .enqueue(object : Callback<MovieDetails> {
                 override fun onResponse(
@@ -14,7 +14,9 @@ class MovieRepository {
                     response: Response<MovieDetails>
                 ) {
                     val movieDetails = response.body()
-                    success.onMovieDetailsSuccess(movieDetails)
+                    if (movieDetails != null) {
+                        success.onResponseSuccess(success = movieDetails)
+                    }
                 }
 
                 override fun onFailure(call: Call<MovieDetails>, t: Throwable) {
@@ -23,7 +25,7 @@ class MovieRepository {
             })
     }
 
-    fun getMovieSuggestions(movieId: Int, success: OnSuggestedMovieSuccess) {
+    fun getMovieSuggestions(movieId: Int, success: OnSuccess<MutableList<SuggestedMovie>>) {
         RetrofitInitializer.service.getMoviesSuggestions(movieId = movieId)
             .enqueue(object : Callback<MoviesSuggestionsResponse> {
                 override fun onResponse(
@@ -31,7 +33,9 @@ class MovieRepository {
                     response: Response<MoviesSuggestionsResponse>
                 ) {
                     val listResponse = response.body()?.movies
-                    success.onSuggestedMovieResponseSuccess(listResponse)
+                    if (listResponse != null) {
+                        success.onResponseSuccess(success = listResponse)
+                    }
                 }
 
                 override fun onFailure(call: Call<MoviesSuggestionsResponse>, t: Throwable) {
@@ -40,15 +44,17 @@ class MovieRepository {
             })
     }
 
-    fun getMoviesList(success: OnMoviesListSuccess) {
+    fun getMoviesList(success: OnSuccess<MutableList<Movie>>) {
         RetrofitInitializer.service.getPopularMovies()
-            .enqueue(object : Callback<MoviesListResponse>{
+            .enqueue(object : Callback<MoviesListResponse> {
                 override fun onResponse(
                     call: Call<MoviesListResponse>,
                     response: Response<MoviesListResponse>
                 ) {
                     val moviesListResponse = response.body()?.movieList
-                    success.onMoviesListResponseSuccess(movieList = moviesListResponse)
+                    if (moviesListResponse != null) {
+                        success.onResponseSuccess(success = moviesListResponse)
+                    }
                 }
 
                 override fun onFailure(call: Call<MoviesListResponse>, t: Throwable) {
@@ -57,7 +63,7 @@ class MovieRepository {
             })
     }
 
-    fun getCastList(movieId: Int, success: OnMovieCastSuccess) {
+    fun getCastList(movieId: Int, success: OnSuccess<MutableList<Cast>>) {
         RetrofitInitializer.service.getCastInfo(movieId = movieId).enqueue(
             object : Callback<CastListResponse> {
                 override fun onResponse(
@@ -66,9 +72,10 @@ class MovieRepository {
                 ) {
                     val castResponse = response.body()?.cast
                     if (castResponse != null) {
-                        success.onMovieCastResponseSuccess(cast = castResponse)
+                        success.onResponseSuccess(success = castResponse)
                     }
                 }
+
                 override fun onFailure(call: Call<CastListResponse>, t: Throwable) {
                     //Toast.makeText(this@CastMovieActivity, ERROR_MSG, Toast.LENGTH_SHORT).show()
                 }
@@ -76,16 +83,16 @@ class MovieRepository {
         )
     }
 
-    fun getPersonalInformation(personId: Int, success: OnCastInformationSuccess) {
+    fun getPersonalInformation(personId: Int, success: OnSuccess<PersonalInformation>) {
         RetrofitInitializer.service.getPersonalInformation(personId = personId)
-            .enqueue(object : Callback<PersonalInformation>{
+            .enqueue(object : Callback<PersonalInformation> {
                 override fun onResponse(
                     call: Call<PersonalInformation>,
                     response: Response<PersonalInformation>
                 ) {
                     val personDetails = response.body()
                     if (personDetails != null) {
-                        success.onCastInformationResponseSuccess(personDetails)
+                        success.onResponseSuccess(success = personDetails)
                     }
                 }
 
@@ -95,23 +102,7 @@ class MovieRepository {
             })
     }
 
-    interface OnMoviesListSuccess {
-        fun onMoviesListResponseSuccess(movieList: MutableList<Movie>?)
-    }
-
-    interface OnMovieSuccess {
-        fun onMovieDetailsSuccess(movieDetails: MovieDetails?)
-    }
-
-    interface OnSuggestedMovieSuccess {
-        fun onSuggestedMovieResponseSuccess(suggestedMovie: MutableList<SuggestedMovie>?)
-    }
-
-    interface OnMovieCastSuccess {
-        fun onMovieCastResponseSuccess(cast: MutableList<Cast>)
-    }
-
-    interface OnCastInformationSuccess {
-        fun onCastInformationResponseSuccess(castInformation: PersonalInformation)
+    interface OnSuccess<T> {
+        fun onResponseSuccess(success: T)
     }
 }

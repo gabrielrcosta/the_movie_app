@@ -61,11 +61,13 @@ class MovieDetailsActivity : AppCompatActivity() {
     }
 
     private fun getMovieDetails(movieId: Int) {
-        repository.getMovieDetails(movieId = movieId, object: MovieRepository.OnMovieSuccess{
-            override fun onMovieDetailsSuccess(movieDetails: MovieDetails?) {
-                setupInformationScreen(movieDetails)
-            }
-        })
+        repository.getMovieDetails(
+            movieId = movieId,
+            object : MovieRepository.OnSuccess<MovieDetails> {
+                override fun onResponseSuccess(success: MovieDetails) {
+                    setupInformationScreen(success)
+                }
+            })
     }
 
     private fun setupInformationScreen(movieDetails: MovieDetails?) {
@@ -93,21 +95,21 @@ class MovieDetailsActivity : AppCompatActivity() {
     }
 
     private fun getCastList(movieId: Int) {
-        repository.getCastList(movieId = movieId, object : MovieRepository.OnMovieCastSuccess {
-            override fun onMovieCastResponseSuccess(cast: MutableList<Cast>) {
-                castAdapter.setCastData(cast)
+        repository.getCastList(movieId = movieId, object : MovieRepository.OnSuccess<MutableList<Cast>> {
+            override fun onResponseSuccess(success: MutableList<Cast>) {
+                castAdapter.setCastData(cast = success)
             }
         })
     }
 
     private fun getSuggestedMovies(movieId: Int) {
-        repository.getMovieSuggestions(movieId = movieId, object: MovieRepository.OnSuggestedMovieSuccess{
-            override fun onSuggestedMovieResponseSuccess(suggestedMovie: MutableList<SuggestedMovie>?) {
-                if (suggestedMovie != null) {
-                    suggestedMoviesAdapter.setData(suggestedMovie)
+        repository.getMovieSuggestions(
+            movieId = movieId,
+            object : MovieRepository.OnSuccess<MutableList<SuggestedMovie>> {
+                override fun onResponseSuccess(success: MutableList<SuggestedMovie>) {
+                    suggestedMoviesAdapter.setData(success)
                 }
-            }
-        })
+            })
     }
 
     private fun getMovieItemClickListener(): SuggestedMoviesAdapter.MovieItemClickListener {

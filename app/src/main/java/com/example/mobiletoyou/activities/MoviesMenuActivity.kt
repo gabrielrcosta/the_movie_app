@@ -38,11 +38,9 @@ class MoviesMenuActivity : AppCompatActivity() {
     }
 
     private fun getMoviesList() {
-        repository.getMoviesList(object : MovieRepository.OnMoviesListSuccess {
-            override fun onMoviesListResponseSuccess(movieList: MutableList<Movie>?) {
-                if (movieList != null) {
-                    menuMoviesAdapter.setData(movies = movieList)
-                }
+        repository.getMoviesList(object : MovieRepository.OnSuccess<MutableList<Movie>> {
+            override fun onResponseSuccess(success: MutableList<Movie>) {
+                menuMoviesAdapter.setData(movies = success)
             }
         })
     }
