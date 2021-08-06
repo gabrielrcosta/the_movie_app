@@ -13,7 +13,7 @@ import com.example.mobiletoyou.Constants.MOVIE_ID
 import com.example.mobiletoyou.Constants.MOVIE_URL
 import com.example.mobiletoyou.Constants.NEXT_MOVIE
 import com.example.mobiletoyou.adapters.CastAdapter
-import com.example.mobiletoyou.adapters.MovieSuggestionsAdapter
+import com.example.mobiletoyou.adapters.SuggestedMoviesAdapter
 import com.example.mobiletoyou.databinding.ActivityMovieDetailsBinding
 import com.example.mobiletoyou.model.Cast
 import com.example.mobiletoyou.model.MovieDetails
@@ -29,56 +29,67 @@ class MovieDetailsActivity : AppCompatActivity() {
     private val repository: MovieRepository by lazy {
         MovieRepository()
     }
-    private val moviesSuggestionsAdapter: MovieSuggestionsAdapter by lazy {
-        MovieSuggestionsAdapter(this, moviesList, getMovieItemClickListener())
-    }
-    private val castAdapter = CastAdapter(this, castList, getCastItemClickListener())
+    private val suggestedMoviesAdapter: SuggestedMoviesAdapter =
+        SuggestedMoviesAdapter(this, moviesList, getMovieItemClickListener())
+
+    private val castAdapter: CastAdapter = CastAdapter(this, castList, getCastItemClickListener())
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMovieDetailsBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.castRecyclerView.adapter = castAdapter
-        binding.castRecyclerView.layoutManager =
-            LinearLayoutManager(this, RecyclerView.HORIZONTAL, false)
-
-        binding.recyclerView.adapter = moviesSuggestionsAdapter
-        binding.recyclerView.layoutManager = LinearLayoutManager(this)
-
         val movieId = intent.getIntExtra(NEXT_MOVIE, MOVIE_ID)
 
         getMovieDetails(movieId = movieId)
         getCastList(movieId = movieId)
         getSuggestedMovies(movieId = movieId)
+
+        setupCastAdapter()
+        setupMoviesAdapter()
+    }
+
+    private fun setupMoviesAdapter() {
+        binding.recyclerView.adapter = suggestedMoviesAdapter
+        binding.recyclerView.layoutManager = LinearLayoutManager(this)
+    }
+
+    private fun setupCastAdapter() {
+        binding.castRecyclerView.adapter = castAdapter
+        binding.castRecyclerView.layoutManager =
+            LinearLayoutManager(this, RecyclerView.HORIZONTAL, false)
     }
 
     private fun getMovieDetails(movieId: Int) {
         repository.getMovieDetails(movieId = movieId, object: MovieRepository.OnMovieSuccess{
             override fun onMovieDetailsSuccess(movieDetails: MovieDetails?) {
-                binding.apply {
-                    layoutIncluded.apply {
-                        Picasso.get().load(MOVIE_URL + movieDetails?.posterPath).into(backgroundPicture)
-                        likeMovieClick.visibility = View.INVISIBLE
-                        likes.text = movieDetails?.voteCount.toString()
-                        title.text = movieDetails?.title
-                        overview.text = movieDetails?.overview
-                        viewsText.text = movieDetails?.popularity.toString()
-                        likeMovie.setOnClickListener {
-                            likeMovie.visibility =
-                                View.INVISIBLE; likeMovieClick.visibility = View.VISIBLE; likes.text =
-                            movieDetails?.voteCount?.plus(1).toString()
-                        }
-                        likeMovieClick.setOnClickListener {
-                            likeMovieClick.visibility =
-                                View.INVISIBLE; likeMovie.visibility =
-                            View.VISIBLE; likes.text =
-                            movieDetails?.voteCount.toString()
-                        }
-                    }
-                }
+                setupInformationScreen(movieDetails)
             }
         })
+    }
+
+    private fun setupInformationScreen(movieDetails: MovieDetails?) {
+        binding.apply {
+            layoutIncluded.apply {
+                Picasso.get().load(MOVIE_URL + movieDetails?.posterPath).into(backgroundPicture)
+                likeMovieClick.visibility = View.INVISIBLE
+                likes.text = movieDetails?.voteCount.toString()
+                title.text = movieDetails?.title
+                overview.text = movieDetails?.overview
+                viewsText.text = movieDetails?.popularity.toString()
+                likeMovie.setOnClickListener {
+                    likeMovie.visibility =
+                        View.INVISIBLE; likeMovieClick.visibility = View.VISIBLE; likes.text =
+                    movieDetails?.voteCount?.plus(1).toString()
+                }
+                likeMovieClick.setOnClickListener {
+                    likeMovieClick.visibility =
+                        View.INVISIBLE; likeMovie.visibility =
+                    View.VISIBLE; likes.text =
+                    movieDetails?.voteCount.toString()
+                }
+            }
+        }
     }
 
     private fun getCastList(movieId: Int) {
@@ -93,15 +104,15 @@ class MovieDetailsActivity : AppCompatActivity() {
         repository.getMovieSuggestions(movieId = movieId, object: MovieRepository.OnSuggestedMovieSuccess{
             override fun onSuggestedMovieResponseSuccess(suggestedMovie: MutableList<SuggestedMovie>?) {
                 if (suggestedMovie != null) {
-                    moviesSuggestionsAdapter.setData(suggestedMovie)
+                    suggestedMoviesAdapter.setData(suggestedMovie)
                 }
             }
         })
     }
 
-    private fun getMovieItemClickListener(): MovieSuggestionsAdapter.MovieItemClickListener {
+    private fun getMovieItemClickListener(): SuggestedMoviesAdapter.MovieItemClickListener {
         return object :
-            MovieSuggestionsAdapter.MovieItemClickListener {
+            SuggestedMoviesAdapter.MovieItemClickListener {
             override fun onItemMovieClicked(id: Int) {
                 val intent = Intent(this@MovieDetailsActivity, MovieDetailsActivity::class.java)
                 intent.putExtra(NEXT_MOVIE, id)

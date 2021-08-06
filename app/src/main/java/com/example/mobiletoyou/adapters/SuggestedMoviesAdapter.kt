@@ -12,7 +12,7 @@ import com.example.mobiletoyou.R
 import com.example.mobiletoyou.model.SuggestedMovie
 import com.squareup.picasso.Picasso
 
-class MovieSuggestionsAdapter(
+class SuggestedMoviesAdapter(
     private val context: Context,
     private val movieSuggestions: MutableList<SuggestedMovie>,
     private val listener: MovieItemClickListener
